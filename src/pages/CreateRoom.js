@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
@@ -7,8 +8,10 @@ import AuthLayout from '../layouts/AuthLayout';
 // components
 import Page from '../components/Page';
 import { MHidden } from '../components/@material-extend';
-import { LoginForm } from '../components/authentication/login';
-import AuthSocial from '../components/authentication/AuthSocial';
+import UserStartForm from '../components/init/UserStartForm';
+import { generateRandomUsername } from '../utils/functions';
+import { getUser } from '../services/auth';
+import CreateRoomForm from '../components/init/CreateRoomForm';
 
 // ----------------------------------------------------------------------
 
@@ -39,45 +42,51 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function Login() {
+export default function CreateRoom() {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const nUser = getUser();
+    setUser(nUser);
+    console.log(nUser);
+  }, []);
   return (
-    <RootStyle title="Login | Minimal-UI">
-      <AuthLayout>
+    <RootStyle title="Guess My Name | Creating Your Room">
+      {/* <AuthLayout>
         Don’t have an account? &nbsp;
         <Link underline="none" variant="subtitle2" component={RouterLink} to="/register">
           Get started
         </Link>
-      </AuthLayout>
+      </AuthLayout> */}
 
-      <MHidden width="mdDown">
+      {/* <MHidden width="mdDown">
         <SectionStyle>
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Hi, Welcome Back
+            Hi, {username}! Welcome Back ;)
           </Typography>
           <img src="/static/illustrations/illustration_login.png" alt="login" />
         </SectionStyle>
-      </MHidden>
+      </MHidden> */}
 
       <Container maxWidth="sm">
         <ContentStyle>
           <Stack sx={{ mb: 5 }}>
             <Typography variant="h4" gutterBottom>
-              Sign in to Minimal
+              Creating your room, @{user.username}
             </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
+            <Typography sx={{ color: 'text.secondary' }}>Enter your details.</Typography>
           </Stack>
-          <AuthSocial />
 
-          <LoginForm />
+          <CreateRoomForm generatedUsername={user.username} />
 
-          <MHidden width="smUp">
+          {/* <MHidden width="smUp">
             <Typography variant="body2" align="center" sx={{ mt: 3 }}>
               Don’t have an account?&nbsp;
               <Link variant="subtitle2" component={RouterLink} to="register">
                 Get started
               </Link>
             </Typography>
-          </MHidden>
+          </MHidden> */}
         </ContentStyle>
       </Container>
     </RootStyle>

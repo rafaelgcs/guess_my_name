@@ -1,6 +1,6 @@
 {
-  "name": "@minimal/material-kit-react",
-  "author": "minimals.cc",
+  "name": "guess-my-name",
+  "author": "rafaelgcs",
   "licence": "MIT",
   "version": "1.2.0",
   "private": false,
@@ -65,6 +65,8 @@
     "react-scripts": "^4.0.1",
     "simplebar": "^5.3.5",
     "simplebar-react": "^2.3.5",
+    "unique-names-generator": "^4.7.1",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.0",
     "yup": "^0.32.9"
   },
