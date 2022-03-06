@@ -5,11 +5,21 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 import NotFound from './pages/Page404';
 import Init from './pages/Init';
 import CreateRoom from './pages/CreateRoom';
+import RoomLayout from './layouts/room';
+import Room from './pages/Room';
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
   return useRoutes([
+    {
+      path: '/room',
+      element: <RoomLayout />,
+      children: [
+        { element: <Navigate to="/init" replace /> },
+        { path: 'in/:code', element: <Room /> }
+      ]
+    },
     {
       path: '/',
       element: <LogoOnlyLayout />,
